@@ -35,7 +35,7 @@ public class ErrorResponse {
 
 	public void appendError(ErrorItem errorItem) {
 		if (errors == null) {
-			errors = new ArrayList<ErrorItem>();
+			errors = new ArrayList<>();
 		}
 		errors.add(errorItem);
 	}

@@ -11,6 +11,9 @@ import ong.pdsi.connector.database.entity.EventEntity;
 @Repository
 public interface EventRepository extends JpaRepository<EventEntity, Integer> {
 
-	@Query("SELECT e FROM EventEntity e WHERE e.responsibleOng.ongId = ?1")
+	@Query(value = "SELECT * FROM tb_evento AS E "
+			+ "INNER JOIN tb_ong AS O "
+			+ "ON E.id_ong = O.id_ong "
+			+ "WHERE O.id_ong = ?1", nativeQuery = true)
 	List<EventEntity> findByOngId(Integer ongId);
 }

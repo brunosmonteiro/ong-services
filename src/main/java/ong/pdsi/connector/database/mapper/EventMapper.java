@@ -15,6 +15,9 @@ public class EventMapper {
 	
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private OngMapper ongMapper;
 
 	public List<Event> toEventList(List<EventEntity> entities) {
 		if (entities == null) {
@@ -35,7 +38,7 @@ public class EventMapper {
 		response.setDescription(eventEntity.getDescription());
 		response.setId(eventEntity.getId());
 		response.setName(eventEntity.getName());
-		response.setResponsibleOng(eventEntity.getResponsibleOng());
+		response.setResponsibleOng(ongMapper.toOng(eventEntity.getResponsibleOng()));
 		response.setParticipants(userMapper.toUserList(eventEntity.getParticipants()));
 		return response;
 	}
@@ -48,7 +51,7 @@ public class EventMapper {
 		response.setDescription(event.getDescription());
 		response.setId(event.getId());
 		response.setName(event.getName());
-		response.setResponsibleOng(event.getResponsibleOng());
+		response.setResponsibleOng(ongMapper.toOngEntity(event.getResponsibleOng()));
 		response.setParticipants(userMapper.toUserEntityList(event.getParticipants()));
 		return response;
 	}

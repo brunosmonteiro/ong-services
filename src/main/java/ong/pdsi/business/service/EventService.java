@@ -40,6 +40,9 @@ public class EventService {
 		if (event == null) {
 			throw new BadRequestException(MessagesMap.EVENT_INEXISTENT_ID);
 		}
+		if (event.getResponsibleOng() == null || !ongId.equals(event.getResponsibleOng().getId())) {
+			throw new BadRequestException(MessagesMap.EVENT_DOES_NOT_BELONG_TO_ONG);
+		}
 		User user = userExecutor.getUserById(userId);
 		if (user == null) {
 			throw new BadRequestException(MessagesMap.USER_INEXISTENT_ID);

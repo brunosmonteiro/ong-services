@@ -1,7 +1,5 @@
 package ong.pdsi.ws.error;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class ErrorItem {
 
 	private String key;
@@ -15,8 +13,7 @@ public class ErrorItem {
 	public ErrorItem(MessagesMap errorItem) {
 		if (errorItem != null) {
 			this.key = errorItem.getCode();
-			this.description = StringUtils.isNotBlank(errorItem.getMessage()) ? errorItem.getMessage()
-					: MessagesMap.GENERIC_ERROR.getMessage();
+			this.description = errorItem.getMessage();
 		}
 	}
 

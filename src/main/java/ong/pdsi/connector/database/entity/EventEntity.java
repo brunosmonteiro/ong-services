@@ -13,8 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import ong.pdsi.domain.ong.Ong;
-
 @Table(name = "tb_evento")
 @Entity
 public class EventEntity {
@@ -30,8 +28,9 @@ public class EventEntity {
 	@Column(name = "nome")
 	private String name;
 	
-	@ManyToOne
-	private Ong responsibleOng;
+	@ManyToOne(targetEntity = OngEntity.class)
+	@JoinColumn(name = "id_ong")
+	private OngEntity responsibleOng;
 	
 	@ManyToMany
 	@JoinTable(name = "evento_usuario", 
@@ -64,11 +63,11 @@ public class EventEntity {
 		this.name = name;
 	}
 
-	public Ong getResponsibleOng() {
+	public OngEntity getResponsibleOng() {
 		return responsibleOng;
 	}
 
-	public void setResponsibleOng(Ong responsibleOng) {
+	public void setResponsibleOng(OngEntity responsibleOng) {
 		this.responsibleOng = responsibleOng;
 	}
 
