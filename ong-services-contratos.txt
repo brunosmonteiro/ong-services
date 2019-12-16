@@ -1,0 +1,200 @@
+CRUD ONG
+
+1) Recupera todas as ONGs:
+
+GET https://ong-services.herokuapp.com/ong-api/ongs
+Resposta: 200
+[
+    {
+        "cnpj": "80332358000150",
+        "description": "Exemplo de ONG para abrigo de idosos",
+        "name": "Exemplo ONG abrigo",
+        "type": "ELDER",
+        "id": 1
+    },
+    {
+        "cnpj": "80332358000150",
+        "description": "Exemplo de ONG para moradores de rua",
+        "name": "Exemplo ONG moradores de rua",
+        "type": "HOMELESS",
+        "id": 2
+    },
+    {
+        "cnpj": "80332358000150",
+        "description": "ONG de teste",
+        "name": "Animal ONG exemplo",
+        "type": "ANIMAL",
+        "id": 3
+    },
+    {
+        "cnpj": "80332358000150",
+        "description": "ONG de teste",
+        "name": "Animal ONG exemplo",
+        "type": "ANIMAL",
+        "id": 4
+    }
+]
+
+** coloquei 4 valore possíveis no "type": ANIMAL, ELDER, CHILD, HOMELESS
+//-------------------------------------------------------------------------
+
+2) Criar ONG
+POST https://ong-services.herokuapp.com/ong-api/ongs
+Exemplo de requisição:
+{
+	"cnpj": "80332358000150",
+	"description": "ONG de teste",
+	"type": "ANIMAL",
+	"name": "Animal ONG exemplo"
+}
+
+Resposta: 200
+{
+	"cnpj": "80332358000150",
+	"description": "ONG de teste",
+	"type": "ANIMAL",
+	"name": "Animal ONG exemplo",
+	"id": 1
+}
+//-------------------------------------------------------------------------
+
+3) Atualizar ONG
+PUT https://ong-services.herokuapp.com/ong-api/ongs
+
+Exemplo de requisição:
+{
+	"cnpj": "80332358000150",
+	"description": "ONG de teste",
+	"type": "ANIMAL",
+	"name": "Animal ONG exemplo ATUALIZADO",
+	"id": 1
+}
+Resposta: 200
+{
+	"cnpj": "80332358000150",
+	"description": "ONG de teste",
+	"type": "ANIMAL",
+	"name": "Animal ONG exemplo ATUALIZADO",
+	"id": 1
+}
+//--------------------------------------------------------------------------
+
+4) Deletar ONG
+DELETE https://ong-services.herokuapp.com/ong-api/ongs
+
+Exemplo de requisição:
+{
+	"id": 1
+}
+
+Resposta: 200
+// sem body
+
+//-------------------------------------------------------------------------
+
+5) Recuperar ONG por id:
+GET https://ong-services.herokuapp.com/ong-api/ongs/{ongId}
+
+Resposta: 200
+{
+	"cnpj": "80332358000150",
+	"description": "ONG de teste",
+	"type": "ANIMAL",
+	"name": "Animal ONG exemplo",
+	"id": 1
+}
+
+
+******************************************************************************
+
+Participar de evento
+
+1) Recuperar todos os eventos da ONG:
+GET https://ong-services.herokuapp.com/event-api/ongs/{ongId}/events
+
+Resposta: 200
+[
+    {
+        "id": 2,
+        "description": "Evento para abrigo",
+        "name": "Evento abrigo",
+        "responsibleOng": {
+            "cnpj": "80332358000150",
+            "description": "Exemplo de ONG para abrigo de idosos",
+            "name": "Exemplo ONG abrigo",
+            "type": "ELDER",
+            "id": 1
+        },
+        "participants": [
+            {
+                "id": 1,
+                "username": "userteste",
+                "name": "Nome teste",
+                "password": "123qwe"
+            },
+            {
+                "id": 2,
+                "username": "caiouser",
+                "name": "Caio",
+                "password": "123qwe"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "description": "Evento para abrigo 2",
+        "name": "Evento abrigo 2",
+        "responsibleOng": {
+            "cnpj": "80332358000150",
+            "description": "Exemplo de ONG para abrigo de idosos",
+            "name": "Exemplo ONG abrigo",
+            "type": "ELDER",
+            "id": 1
+        },
+        "participants": []
+    }
+]
+//-------------------------------------------------------------------------
+
+2) Participar de evento:
+POST https://ong-services.herokuapp.com/event-api/ongs/{ongId}/events/{eventId}/participants/{userId}
+
+** criei 5 users na base de dados só para poder aplicar essa funcionalidade, então temos userId={1, 2, 3, 4, 5} por enquanto
+
+Resposta: 200
+{
+    "id": 1,
+    "description": "Evento de teste para ONG de animais",
+    "name": "Evento Animais",
+    "responsibleOng": {
+        "cnpj": "80332358000150",
+        "description": "ONG de teste",
+        "name": "Animal ONG exemplo",
+        "type": "ANIMAL",
+        "id": 3
+    },
+    "participants": [
+        {
+            "id": 1,
+            "username": "userteste",
+            "name": "Nome teste",
+            "password": "123qwe"
+        },
+        {
+            "id": 2,
+            "username": "caiouser", // retorna o evento com o usuário recém-inserido já constando como participante
+            "name": "Caio",
+            "password": "123qwe"
+        }
+    ]
+}
+
+//-------------------------------------------------------------------------
+
+Acesso ao banco de dados:
+
+Host: ec2-174-129-255-10.compute-1.amazonaws.com
+Database: ddd1nrvb1bmfte
+User: hmgevruvmeercd
+Port: 5432
+Password: a1686bdfe8a690f05936226a11b026eecabf85dd8ad81b7e828c0b948811eb99
