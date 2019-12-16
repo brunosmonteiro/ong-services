@@ -18,7 +18,7 @@ import ong.pdsi.domain.ong.Ong;
 import ong.pdsi.ws.validator.OngValidator;
 
 @RestController
-@RequestMapping("/api/ongs")
+@RequestMapping("/ong-api/ongs")
 public class OngController {
 		
 	@Autowired

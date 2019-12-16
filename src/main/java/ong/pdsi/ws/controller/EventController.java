@@ -13,7 +13,7 @@ import ong.pdsi.business.service.EventService;
 import ong.pdsi.domain.event.Event;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/event-api")
 public class EventController {
 	
 	@Autowired
