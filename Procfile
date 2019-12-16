@@ -1,1 +1,1 @@
-web: java -jar $JAVA_OPTS -Dserver.port=8080 target/ong-services-0.0.1-SNAPSHOT.jar
+web: java -jar $JAVA_OPTS -Dserver.port=$PORT target/ong-services-0.0.1-SNAPSHOT.jar
